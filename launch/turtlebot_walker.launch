@@ -1,0 +1,19 @@
+<launch>
+
+  <!-- Optionally enable recording of data using the rosbag tool if "record:=true"
+       is specified on the roslaunch command line.  The resulting bag file
+       will be written to the ~/.ros directory unless ROS_HOME is defined, in which
+       case it will be written there.  The bag filename will begin with "turtlebot_walker"
+       and have a date/time stamp.                                                    -->
+  <arg name="record" default="false" />
+  <node if="$(arg record)" pkg="rosbag" type="record" name="turtlebot_walker_record"
+          args="-a -o turtlebot_walker" />
+ 
+  <!-- Startup the turtlebot_gazebo world -->
+  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+  </include>
+  
+  <!-- Startup the turtlebot_walker -->
+  <node pkg="turtlebot_walker" name="turtlebot_walker_node" type="turtlebot_walker_node" />
+  
+</launch>
