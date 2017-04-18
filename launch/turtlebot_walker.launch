@@ -7,7 +7,7 @@
        and have a date/time stamp.                                                    -->
   <arg name="record" default="false" />
   <node if="$(arg record)" pkg="rosbag" type="record" name="turtlebot_walker_record"
-          args="-a -o turtlebot_walker" />
+          args="-a -o turtlebot_walker -x '/camera/(.*)' "/>
  
   <!-- Startup the turtlebot_gazebo world -->
   <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
