@@ -6,7 +6,7 @@ The turtlebot_walker project creates a ROS node that works in conjunction with t
 This ROS package has been implemented and tested on ROS Indigo Igloo only.  It was developed on an Ubuntu 14.04 system with the Turtlebot simulation stack installed using the command "$ sudo apt-get install ros-indigo-turtlebot-gazebo ros-indigo-turtlebot-apps ros-indigo-turtlebot-rviz-launchers".  The code for the node is written in C++ and was originally compiled using the Ubuntu 14.04 gcc compiler.
 
 ## Technical Notes
-The sensor information used by the turtlebot_walker_node is read from the "/scan" topic, and consists of sensor_msgs/LaserScan messages published using the simulated Turtlebot depth camera device published by the /laserscan_nodelet_manager.  Although the sensor subscription code is generalizable and will ultimately be made non-device specific, it is at this time specific to data produced by a simulated asus_xtion_pro.  This device's output, when processed into a simulated LaserScan, produces range information in an approximately 60 degree arc centered on the forward direction of travel for the Turtlebot (positive x-axis of the base_link frame) with 640 individual range readings from each scan.
+The sensor information used by the turtlebot_walker_node is read from the "/scan" topic, and consists of sensor_msgs/LaserScan messages published using the simulated Turtlebot depth camera device published by the /laserscan_nodelet_manager.  This version of the sensor code is as non-specific as possible, but it was only tested with data produced by a simulated asus_xtion_pro.  This device's output, when processed into a simulated LaserScan, produces range information in an approximately 60 degree arc centered on the forward direction of travel for the Turtlebot (positive x-axis of the base_link frame) with 640 individual range readings from each scan.
 
 The turtlebot_walker_node sends velocity commands to the Turtlebot by publishing on the topic /cmd_vel_mux/input/teleop in the form of geometry_msgs/Twist messages (only the linear x velocity and angular z velocity are used, commanding the forward/backward movement of the Turtlebot and its rotation about the vertical z-axis, respectively).
 
@@ -23,6 +23,11 @@ Prior to trying to start the turtlebot_walker, be sure to have "source"ed the se
     - roslaunch turtlebot_walker turtlebot_walker.launch
     
 The Gazebo simulator will start up along with the ros master and support nodes, and the simulated Turtlebot will begin its "walker" behavior in the turtlebot world.
+
+## Walker behavior
+Two versions of the walker behavior are present in the Tbot class, a "uni-turn" version and a "bi-turn" version.  The bi-turn version is intended to preferentially turn towards the side with the greater distance when obstacles are encountered, but it does not work correctly at the time of this writing.  The uni-turn version always turns right.
+
+Adjusting the frequency at which commands are issued and callbacks processed seems to alter the behavior of the Turtlebot.  Lower frequencies produce more "predictable" behavior with respect to the angles at which the Turtlebot turns off of obstacles.  Higher frequencies appear to produce more realistic behavior with the departure angle being more closely associated with the approach angle to objects.  The command frequency is adjusted in the constructor for the Tbot object.
 
 ## Data collection and playback
 The launch file includes the ability to record all topics published during its operation (except for the voluminous /camera/* topics, which are excluded).  If a recording is made, the bag file will be stored in the directory ~/.ros, unless ROS_HOME is defined, in which case it wil be stored there.  The bag filename is prefixed with "turtlebot_walker" and includes the date and time of the recording.  To record data, use a modified version of the launch command:
