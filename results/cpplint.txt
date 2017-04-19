@@ -1,0 +1,20 @@
+./Tbot.hpp:63:  Is this a non-const reference? If so, make const or use a pointer: ros::NodeHandle &nh  [runtime/references] [2]
+./Tbot.hpp:85:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+./turtlebot_walker_node.cpp:68:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:101:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:109:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:110:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:111:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:112:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:113:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:114:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:162:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:167:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:182:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:183:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:190:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./Tbot.cpp:164:  Add #include <algorithm> for min  [build/include_what_you_use] [4]
+Done processing ./Tbot.hpp
+Done processing ./turtlebot_walker_node.cpp
+Done processing ./Tbot.cpp
+Total errors found: 16

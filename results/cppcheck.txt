@@ -1,0 +1,7 @@
+Checking Tbot.cpp...
+1/2 files checked 75% done
+Checking turtlebot_walker_node.cpp...
+2/2 files checked 100% done
+Checking usage of global functions..
+[Tbot.cpp:181]: (style) The function 'behaviorWalkerBiturn' is never used.
+(information) Cppcheck cannot find all the include files (use --check-config for details)
