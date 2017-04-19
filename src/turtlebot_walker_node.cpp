@@ -5,9 +5,13 @@
  * @author MJenkins, ENPM 808X Spring 2017
  * @date Apr 17, 2017 - Creation
  *
- * @brief <brief description>
+ * @brief Main function for a ROS node driving a Turtlebot walker behavior
  *
- * <details>
+ * Turtlebot walker behavior should cause the Turtlebot to move forward until it reaches
+ * an obstacle (but not colliding), then rotate in place until the way ahead is clear,
+ * then move forward again and repeat.  The ROS node depends on a Tbot object that
+ * represents the state of the Turtlebot (distance to obstacles) and implements the
+ * walker behavior (moving forward until an obstacle is close, then turning).
  *
  * *
  * * BSD 3-Clause License
@@ -45,8 +49,6 @@
 #include "ros/ros.h"
 #include "Tbot.hpp"
 
-
-
 int main(int argc, char **argv) {
   /**
    * Call ros::init() with argc and argv so that it can perform any ROS arguments and
@@ -63,23 +65,27 @@ int main(int argc, char **argv) {
   // Let user know we are running
   ROS_INFO_STREAM("turtlebot_walker_node has started");
 
-  // Create my turtlebot object
+  // Create a Tbot object to hold Turtlebot state and implement Turtlebot behavior
   Tbot tbot;
 
+  // The Tbot.initialize method takes care of setting up any ROS communications
   tbot.initialize(nh);
 
+  // Determine at what rate the Tbot wants to process behavior
   ros::Rate rate(tbot.getCommandFrequency());
   while (ros::ok()) {
-    tbot.behaviorWalkerUniturn();
+    // Let ROS do its thing (process callbacks, for example)
     ros::spinOnce();
+    // Call the desired behavior
+    tbot.behaviorWalkerUniturn();
+    // Pause for rate control
     rate.sleep();
   }
-
 
   // Tell user we are exiting
   ROS_INFO_STREAM("turtlebot_walker_node is exiting");
 
-    return 0;
-  }
+  return 0;
+}
 
 

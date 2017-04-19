@@ -5,9 +5,11 @@
  * @author MJenkins, ENPM 808X Spring 2017
  * @date Apr 17, 2017 - Creation
  *
- * @brief <brief description>
+ * @brief Tbot represents certain aspects of a Turtlebot for the purposes of sensing and control
  *
- * <details>
+ * The Tbot class represents certain aspects of a Turtlebot for the purposes of receiving
+ * LaserScan data (processed from a 3D camera), storing the Turtlebot state with respect
+ * to local obstacles, and behaving in certain ways based on the stored Turtlebot state.
  *
  * *
  * * BSD 3-Clause License
@@ -49,7 +51,7 @@
 #include "geometry_msgs/Twist.h"
 #include "sensor_msgs/LaserScan.h"
 
-/** @brief <brief description>
+/** @brief Tbot represents certain aspects of a Turtlebot for the purposes of sensing and control
  */
 
 class Tbot {
